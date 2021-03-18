@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using ChargingStation.Door;
 using ChargingStation.IdReader;
 using ChargingStation.UsbCharger;
 
 namespace ChargingStation
 {
-    class StationControl
+    public class StationControl
     {
         // Enumeration for keeping track of state
         // Enum med tilstande ("states") svarende til tilstandsdiagrammet for klassen
@@ -22,14 +23,18 @@ namespace ChargingStation
         private IUsbCharger _charger;
         private int _oldId;
         private int CurrentId;
-        // _door;
+        private IDoor _door;
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
         // Constructor for injecting dependency
-        public StationControl(IIdReader idReader)
+        public StationControl(IIdReader idReader, IDoor door, IUsbCharger charger)
         {
             idReader.IdReadEvent += HandleReadEvent;
+            door.DoorEvent += HandleDoorEvent;
+            _charger = charger;
+            _door = door;
+            _state = LadeskabState.Available;
         }
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
@@ -92,6 +97,11 @@ namespace ChargingStation
         {
             CurrentId = e.Id;
             RfidDetected(CurrentId);
+        }
+
+        private void HandleDoorEvent(object sender, DoorEventArgs e)
+        {
+            
         }
     }
 }

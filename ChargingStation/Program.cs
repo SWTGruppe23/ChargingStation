@@ -1,4 +1,6 @@
 ﻿using System;
+using ChargingStation.IdReader;
+
 
 namespace ChargingStation
 {
@@ -7,6 +9,7 @@ namespace ChargingStation
         static void Main(string[] args)
         {
             // Assemble your system here from all the classes
+            IIdReader rfidReader = new RfidReader();
 
             bool finish = false;
             do
@@ -23,11 +26,11 @@ namespace ChargingStation
                         break;
 
                     case 'O':
-                        door.OnDoorOpen();
+                        //door.OnDoorOpen();
                         break;
 
                     case 'C':
-                        door.OnDoorClose();
+                        //door.OnDoorClose();
                         break;
 
                     case 'R':
@@ -37,7 +40,6 @@ namespace ChargingStation
                         int id = Convert.ToInt32(idString);
                         rfidReader.ReadId(id);
                         break;
-
                     default:
                         break;
                 }

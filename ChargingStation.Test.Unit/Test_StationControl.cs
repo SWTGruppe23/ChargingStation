@@ -8,7 +8,7 @@ using NUnit.Framework;
 
 namespace ChargingStation.Test.Unit
 {
-    public class Tests
+    public class Tests_StationControl
     {
         private StationControl _uut;
         private IIdReader _fakeIdReader = Substitute.For<IIdReader>();
@@ -25,19 +25,8 @@ namespace ChargingStation.Test.Unit
         [Test]
         public void IIdReader_ReadId_IdReadEvent()
         {
-            //_fakeIdReader.ReadId(10); 
             _fakeIdReader.IdReadEvent += Raise.EventWith(new object(), new IdReadEventArgs());
             _fakeDoor.Received(1).LockDoor();
-            
-            //_uut.Received(1).HandleReadEvent(_fakeIdReader, new IdReadEventArgs { Id = 10 });
-            
-
-            //var wasCalled = false;
-            //_fakeIdReader.IdReadEvent += (sender, args) => wasCalled = true;
-
-            //_fakeIdReader.IdReadEvent += Raise.EventWith(new object(), new IdReadEventArgs());
-            ////Assert.That(_uut.Received(1).);
-            //Assert.True(wasCalled);
         }
     }
-}//
+}

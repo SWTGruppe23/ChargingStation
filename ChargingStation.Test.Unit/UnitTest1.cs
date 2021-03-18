@@ -21,10 +21,12 @@ namespace ChargingStation.Test.Unit
             _uut = new StationControl(_fakeIdReader, _fakeDoor, _usbChargerSimulator);
         }
 
+        
         [Test]
         public void IIdReader_ReadId_IdReadEvent()
         {
-            _fakeIdReader.ReadId(10);
+            //_fakeIdReader.ReadId(10); 
+            _fakeIdReader.IdReadEvent += Raise.EventWith(new object(), new IdReadEventArgs());
             _fakeDoor.Received(1).LockDoor();
             
             //_uut.Received(1).HandleReadEvent(_fakeIdReader, new IdReadEventArgs { Id = 10 });

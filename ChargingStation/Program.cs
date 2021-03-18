@@ -11,6 +11,7 @@ namespace ChargingStation
             // Assemble your system here from all the classes
             IIdReader rfidReader = new RfidReader();
 
+
             bool finish = false;
             do
             {

@@ -21,21 +21,21 @@ namespace ChargingStation.Door
             doorLocked_ = false;
         }
 
-        public void openDoor()
+        public void OpenDoor()
         {
-            onDoorOpend(new DoorEventArgs{DoorOpened = true});
+            OnDoorOpen(new DoorEventArgs{DoorOpened = true});
         }
 
-        public void closeDoor()
+        public void CloseDoor()
         {
-            onDoorClosed(new DoorEventArgs { DoorOpened = false });
+            OnDoorClose(new DoorEventArgs { DoorOpened = false });
         }
 
-        protected virtual void onDoorOpend(DoorEventArgs e)
+        protected virtual void OnDoorOpen(DoorEventArgs e)
         {
             DoorEvent?.Invoke(this, e);
         }
-        protected virtual void onDoorClosed(DoorEventArgs e)
+        protected virtual void OnDoorClose(DoorEventArgs e)
         {
             DoorEvent?.Invoke(this, e);
         }

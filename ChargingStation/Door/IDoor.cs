@@ -15,5 +15,7 @@ namespace ChargingStation.Door
         event EventHandler<DoorEventArgs> DoorEvent;
         public void LockDoor();
         public void UnlockDoor();
+        public void OpenDoor();
+        public void CloseDoor();
     }
 }

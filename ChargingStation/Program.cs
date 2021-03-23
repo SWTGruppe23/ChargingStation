@@ -1,4 +1,5 @@
 ﻿using System;
+using ChargingStation.Door;
 using ChargingStation.IdReader;
 
 
@@ -10,6 +11,7 @@ namespace ChargingStation
         {
             // Assemble your system here from all the classes
             IIdReader rfidReader = new RfidReader();
+            IDoor door = new Door.Door();
 
 
             bool finish = false;
@@ -27,11 +29,11 @@ namespace ChargingStation
                         break;
 
                     case 'O':
-                        //door.OnDoorOpen();
+                        door.OpenDoor();
                         break;
 
                     case 'C':
-                        //door.OnDoorClose();
+                        door.CloseDoor();
                         break;
 
                     case 'R':

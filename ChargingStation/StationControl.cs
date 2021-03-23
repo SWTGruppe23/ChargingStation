@@ -21,9 +21,10 @@ namespace ChargingStation
         // Her mangler flere member variable
         private LadeskabState _state;
         private IUsbCharger _charger;
+        private IDoor _door;
         private int _oldId;
         private int CurrentId;
-        private IDoor _door;
+        
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
@@ -66,6 +67,7 @@ namespace ChargingStation
 
                 case LadeskabState.DoorOpen:
                     // Ignore
+                    Console.WriteLine("luk ladeskab");
                     break;
 
                 case LadeskabState.Locked:
@@ -98,11 +100,18 @@ namespace ChargingStation
             switch (_state)
             {
                 case LadeskabState.Available:
-                    _door.OpenDoor();
                     Console.WriteLine("Tilslut Telefon");
                     _state = LadeskabState.DoorOpen;
                     break;
-                
+
+                case LadeskabState.DoorOpen:
+                    //ignorrer
+                    break;
+
+                case LadeskabState.Locked:
+                    //ignorer
+                    break;
+
             }
         }
 
@@ -111,9 +120,16 @@ namespace ChargingStation
             switch (_state)
             {
                 case LadeskabState.DoorOpen:
-                    _door.CloseDoor();
                     Console.WriteLine("Indlæs RFID");
                     _state = LadeskabState.Available;
+                    break;
+
+                case LadeskabState.Available:
+                    //ignorrer
+                    break;
+
+                case LadeskabState.Locked:
+                    //ignorer
                     break;
 
             }
@@ -127,13 +143,14 @@ namespace ChargingStation
 
         private void HandleDoorEvent(object sender, DoorEventArgs e)
         {
-            if (e.DoorOpened == true)
+            switch (e.DoorOpened)
             {
-                DoorOpend();
-            }
-            else
-            {
-                DoorClosed();
+                case true:
+                    DoorOpend();
+                    break;
+                case false:
+                    DoorClosed();
+                    break;
             }
         }
     }

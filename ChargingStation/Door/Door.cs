@@ -8,17 +8,17 @@ namespace ChargingStation.Door
 {
     class Door : IDoor
     {
-        private bool doorLocked_;
+        //private bool doorLocked_;
 
         public event EventHandler<DoorEventArgs> DoorEvent;
         public void LockDoor()
         {
-            doorLocked_ = true;
+            //doorLocked_ = true;
         }
 
         public void UnlockDoor()
         {
-            doorLocked_ = false;
+            //doorLocked_ = false;
         }
 
         public void OpenDoor()
@@ -28,16 +28,16 @@ namespace ChargingStation.Door
 
         public void CloseDoor()
         {
-            OnDoorClose(new DoorEventArgs { DoorOpened = false });
+            OnDoorOpen(new DoorEventArgs { DoorOpened = false });
         }
 
         protected virtual void OnDoorOpen(DoorEventArgs e)
         {
             DoorEvent?.Invoke(this, e);
         }
-        protected virtual void OnDoorClose(DoorEventArgs e)
-        {
-            DoorEvent?.Invoke(this, e);
-        }
+        //protected virtual void OnDoorClose(DoorEventArgs e)
+        //{
+        //    DoorEvent?.Invoke(this, e);
+        //}
     }
 }

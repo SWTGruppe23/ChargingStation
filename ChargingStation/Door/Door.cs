@@ -8,15 +8,36 @@ namespace ChargingStation.Door
 {
     class Door : IDoor
     {
+        private bool doorLocked_;
+
         public event EventHandler<DoorEventArgs> DoorEvent;
         public void LockDoor()
         {
-            throw new NotImplementedException();
+            doorLocked_ = true;
         }
 
         public void UnlockDoor()
         {
-            throw new NotImplementedException();
+            doorLocked_ = false;
+        }
+
+        public void openDoor()
+        {
+            onDoorOpend(new DoorEventArgs{DoorOpened = true});
+        }
+
+        public void closeDoor()
+        {
+            onDoorClosed(new DoorEventArgs { DoorOpened = false });
+        }
+
+        protected virtual void onDoorOpend(DoorEventArgs e)
+        {
+            DoorEvent?.Invoke(this, e);
+        }
+        protected virtual void onDoorClosed(DoorEventArgs e)
+        {
+            DoorEvent?.Invoke(this, e);
         }
     }
 }

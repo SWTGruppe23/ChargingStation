@@ -91,7 +91,12 @@ namespace ChargingStation
         private void HandleReadEvent(object sender, IdReadEventArgs e)
         {
             CurrentId = e.Id;
-            // Handle Id
+            RfidDetected(CurrentId);
+        }
+
+        private void HandleDoorEvent(object sender, DoorEventArgs e)
+        {
+            
         }
     }
 }

@@ -10,8 +10,6 @@ namespace ChargingStation.IdReader
 
         public void ReadId(int newId)
         {
-
-
             OnIdRead(new IdReadEventArgs{Id = newId});
         }
 

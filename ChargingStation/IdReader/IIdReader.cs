@@ -12,5 +12,6 @@ namespace ChargingStation.IdReader
     public interface IIdReader
     {
         event EventHandler<IdReadEventArgs> IdReadEvent;
+        public void ReadId(int newId);
     }
 }

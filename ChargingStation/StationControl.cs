@@ -93,6 +93,32 @@ namespace ChargingStation
 
         // Her mangler de andre trigger handlere
 
+        private void DoorOpend()
+        {
+            switch (_state)
+            {
+                case LadeskabState.Available:
+                    _door.OpenDoor();
+                    Console.WriteLine("Tilslut Telefon");
+                    _state = LadeskabState.DoorOpen;
+                    break;
+                
+            }
+        }
+
+        private void DoorClosed()
+        {
+            switch (_state)
+            {
+                case LadeskabState.DoorOpen:
+                    _door.CloseDoor();
+                    Console.WriteLine("Indlæs RFID");
+                    _state = LadeskabState.Available;
+                    break;
+
+            }
+        }
+
         private void HandleReadEvent(object sender, IdReadEventArgs e)
         {
             CurrentId = e.Id;
@@ -101,7 +127,14 @@ namespace ChargingStation
 
         private void HandleDoorEvent(object sender, DoorEventArgs e)
         {
-            
+            if (e.DoorOpened == true)
+            {
+                DoorOpend();
+            }
+            else
+            {
+                DoorClosed();
+            }
         }
     }
 }

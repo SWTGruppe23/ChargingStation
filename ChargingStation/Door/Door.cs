@@ -23,21 +23,21 @@ namespace ChargingStation.Door
 
         public void OpenDoor()
         {
-            OnDoorOpen(new DoorEventArgs{DoorOpened = true});
+            OnDoorOpen(new DoorEventArgs{ DoorOpened = true });
         }
 
         public void CloseDoor()
         {
-            OnDoorOpen(new DoorEventArgs { DoorOpened = false });
+            OnDoorClose(new DoorEventArgs { DoorOpened = false });
         }
 
-        protected virtual void OnDoorOpen(DoorEventArgs e)
+        protected void OnDoorOpen(DoorEventArgs e)      // Var virtual, men kunne ikke se hvorfor
         {
             DoorEvent?.Invoke(this, e);
         }
-        //protected virtual void OnDoorClose(DoorEventArgs e)
-        //{
-        //    DoorEvent?.Invoke(this, e);
-        //}
+        protected void OnDoorClose(DoorEventArgs e)     // var virtual 
+        {
+            DoorEvent?.Invoke(this, e);
+        }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
+using ChargingStation.ChargeControl;
 using ChargingStation.Door;
 using ChargingStation.IdReader;
 using ChargingStation.UsbCharger;
-
 
 namespace ChargingStation
 {
@@ -13,9 +13,8 @@ namespace ChargingStation
             // Assemble your system here from all the classes
             IIdReader rfidReader = new RfidReader();
             IDoor door = new Door.Door();
-            IUsbCharger charger = new UsbChargerSimulator();
+            IChargeControl charger = new ChargeControl.ChargeControl();
             StationControl control = new StationControl(rfidReader, door, charger);
-
 
             bool finish = false;
             do
@@ -46,6 +45,7 @@ namespace ChargingStation
                         int id = Convert.ToInt32(idString);
                         rfidReader.ReadId(id);
                         break;
+
                     default:
                         break;
                 }
@@ -54,3 +54,4 @@ namespace ChargingStation
         }
     }
 }
+

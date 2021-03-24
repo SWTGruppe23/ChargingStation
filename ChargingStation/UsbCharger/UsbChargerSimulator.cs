@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace ChargingStation.UsbCharger
@@ -47,7 +43,7 @@ namespace ChargingStation.UsbCharger
                 _ticksSinceStart++;
                 if (Connected && !_overload)
                 {
-                    double newValue = MaxCurrent -
+                    double newValue = MaxCurrent - 
                                       _ticksSinceStart * (MaxCurrent - FullyChargedCurrent) / (ChargeTimeMinutes * 60 * 1000 / CurrentTickInterval);
                     CurrentValue = Math.Max(newValue, FullyChargedCurrent);
                 }
@@ -113,7 +109,7 @@ namespace ChargingStation.UsbCharger
 
         private void OnNewCurrent()
         {
-            CurrentValueEvent?.Invoke(this, new CurrentEventArgs() { Current = this.CurrentValue });
+            CurrentValueEvent?.Invoke(this, new CurrentEventArgs() {Current = this.CurrentValue});
         }
     }
 }

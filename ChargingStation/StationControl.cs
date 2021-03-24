@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using ChargingStation.ChargeControl;
 using ChargingStation.Door;
-using ChargingStation.IdReader;
 using ChargingStation.UsbCharger;
+using ChargingStation.IdReader;
 
 namespace ChargingStation
 {
     public class StationControl
     {
-        // Enumeration for keeping track of state
         // Enum med tilstande ("states") svarende til tilstandsdiagrammet for klassen
         private enum LadeskabState
         {
@@ -18,18 +20,18 @@ namespace ChargingStation
             Locked,
             DoorOpen
         };
+
         // Her mangler flere member variable
         private LadeskabState _state;
-        private IUsbCharger _charger;
-        private IDoor _door;
+        private IChargeControl _charger;
         private int _oldId;
         private int CurrentId;
-        
+        private IDoor _door;
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
-        // Constructor for injecting dependency
-        public StationControl(IIdReader idReader, IDoor door, IUsbCharger charger)
+        // Her mangler constructor
+        public StationControl(IIdReader idReader, IDoor door, IChargeControl charger)
         {
             idReader.IdReadEvent += HandleReadEvent;
             door.DoorEvent += HandleDoorEvent;
@@ -67,7 +69,6 @@ namespace ChargingStation
 
                 case LadeskabState.DoorOpen:
                     // Ignore
-                    Console.WriteLine("luk ladeskab");
                     break;
 
                 case LadeskabState.Locked:
@@ -94,8 +95,29 @@ namespace ChargingStation
         }
 
         // Her mangler de andre trigger handlere
+        private void HandleReadEvent(object sender, IdReadEventArgs e)
+        {
+            CurrentId = e.Id;
+            RfidDetected(CurrentId);
+        }
 
-        private void DoorOpend()
+        private void HandleDoorEvent(object sender, DoorEventArgs e)
+        {
+            switch (e.DoorOpened)
+            {
+                case true:
+                    DoorOpened();
+                    break;
+                case false:
+                    DoorClosed();
+                    break;
+            }
+        }
+
+
+        // Flere funktioner
+
+        private void DoorOpened()
         {
             switch (_state)
             {
@@ -132,25 +154,6 @@ namespace ChargingStation
                     //ignorer
                     break;
 
-            }
-        }
-
-        private void HandleReadEvent(object sender, IdReadEventArgs e)
-        {
-            CurrentId = e.Id;
-            RfidDetected(CurrentId);
-        }
-
-        private void HandleDoorEvent(object sender, DoorEventArgs e)
-        {
-            switch (e.DoorOpened)
-            {
-                case true:
-                    DoorOpend();
-                    break;
-                case false:
-                    DoorClosed();
-                    break;
             }
         }
     }

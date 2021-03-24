@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChargingStation.UsbCharger
 {
@@ -27,5 +23,5 @@ namespace ChargingStation.UsbCharger
         void StartCharge();
         // Stop charging
         void StopCharge();
-        }
+    }
 }

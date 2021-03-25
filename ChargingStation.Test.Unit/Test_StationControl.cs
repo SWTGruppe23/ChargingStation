@@ -31,6 +31,18 @@ namespace ChargingStation.Test.Unit
             Assert.That(_uut._state, Is.EqualTo(StationControl.LadeskabState.Available) );
         }
 
+        [Test]
+        public void RdidDetected_IsAvailable_IsConnected_LockDoorIsCalled()
+        {
+            // Arrange
+            _fakeChargeControl.Connected.Returns(true);
+            _uut._state = StationControl.LadeskabState.Available;
+            // Act
+            _uut.RfidDetected(1);
+            // Assert
+            _fakeDoor.Received(1).LockDoor();
+        }
+
         //[Test]
         //public void IIdReader_ReadId_IdReadEvent()
         //{

@@ -43,7 +43,7 @@ namespace ChargingStation
         }
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
-        private void RfidDetected(int id)
+        public void RfidDetected(int id)
         {
             switch (_state)
             {

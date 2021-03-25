@@ -91,13 +91,13 @@ namespace ChargingStation
         }
 
         // Her mangler de andre trigger handlere
-        private void HandleReadEvent(object sender, IdReadEventArgs e)
+        public void HandleReadEvent(object sender, IdReadEventArgs e)
         {
             CurrentId = e.Id;
             RfidDetected(CurrentId);
         }
 
-        private void HandleDoorEvent(object sender, DoorEventArgs e)
+        public void HandleDoorEvent(object sender, DoorEventArgs e)
         {
             switch (e.DoorOpened)
             {

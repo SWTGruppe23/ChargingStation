@@ -7,6 +7,7 @@ using ChargingStation.Logger;
 using ChargingStation.UsbCharger;
 using NSubstitute;
 using NSubstitute.ReceivedExtensions;
+using NSubstitute.Routing.Handlers;
 using NUnit.Framework;
 
 namespace ChargingStation.Test.Unit
@@ -103,11 +104,17 @@ namespace ChargingStation.Test.Unit
             _fakeDoor.Received(0).UnlockDoor();
         }
 
-        //[Test]
-        //public void IIdReader_ReadId_IdReadEvent()
-        //{
-        //    _fakeIdReader.IdReadEvent += Raise.EventWith(new object(), new IdReadEventArgs());
-        //    _fakeDoor.Received(1).LockDoor();
-        //}
+        [Test]
+        public void DoorClosed_Locked_IdMismatch_UnlockDoorNotCalled()
+        {
+            // Clear subs
+            _fakeDoor.ClearReceivedCalls();
+            // Arrange
+
+            // Act
+            
+            // Assert
+            
+        }
     }
 }

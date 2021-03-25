@@ -12,7 +12,7 @@ namespace ChargingStation.UsbCharger
         private const int ChargeTimeMinutes = 20; // minutes
         private const int CurrentTickInterval = 250; // ms
 
-        public event EventHandler<CurrentEventArgs> CurrentValueEvent;
+        public event EventHandler<ChargerEventArgs> ChargerEvent;
 
         public double CurrentValue { get; private set; }
 
@@ -109,7 +109,7 @@ namespace ChargingStation.UsbCharger
 
         private void OnNewCurrent()
         {
-            CurrentValueEvent?.Invoke(this, new CurrentEventArgs() {Current = this.CurrentValue});
+            ChargerEvent?.Invoke(this, new ChargerEventArgs() {Current = this.CurrentValue});
         }
     }
 }

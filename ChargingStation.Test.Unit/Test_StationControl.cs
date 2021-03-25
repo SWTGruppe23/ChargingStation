@@ -44,6 +44,32 @@ namespace ChargingStation.Test.Unit
         }
 
         //[Test]
+        //public void RdidDetected_IsAvailable_NotConnected_LockDoorIsCalled()
+        //{
+        //    // Arrange
+        //    _fakeChargeControl.Connected.Returns(false);
+        //    _uut._state = StationControl.LadeskabState.Available;
+        //    // Act
+        //    _uut.RfidDetected(1);
+        //    // Assert
+        //    ;
+        //}
+
+        [Test]
+        public void RdidDetected_Locked_UnlockDoorIsCalled()
+        {
+            // Arrange
+            _fakeChargeControl.Connected.Returns(true);
+            _uut._state = StationControl.LadeskabState.Available;
+            _uut.RfidDetected(1);
+            _uut._state = StationControl.LadeskabState.Locked;
+            // Act
+            _uut.RfidDetected(1);
+            // Assert
+            _fakeDoor.Received(1).UnlockDoor();
+        }
+
+        //[Test]
         //public void IIdReader_ReadId_IdReadEvent()
         //{
         //    _fakeIdReader.IdReadEvent += Raise.EventWith(new object(), new IdReadEventArgs());

@@ -60,7 +60,20 @@ namespace ChargingStation.Test.Unit
         }
 
         [Test]
-        public void RdidDetected_Locked_UnlockDoorIsCalled()
+        public void RdidDetected_DoorOpen_StartChargeNotCalled()
+        {
+            // Clear subs
+            _fakeChargeControl.ClearReceivedCalls();
+            // Arrange
+            _uut._state = StationControl.LadeskabState.DoorOpen;
+            // Act
+            _uut.RfidDetected(1);
+            // Assert
+            _fakeChargeControl.Received(0).StartCharge();
+        }
+
+        [Test]
+        public void RdidDetected_Locked_IdMatch_UnlockDoorIsCalled()
         {
             // Clear subs
             _fakeDoor.ClearReceivedCalls();
@@ -73,6 +86,21 @@ namespace ChargingStation.Test.Unit
             _uut.RfidDetected(1);
             // Assert
             _fakeDoor.Received(1).UnlockDoor();
+        }
+
+        [Test]
+        public void RdidDetected_Locked_IdMismatch_UnlockDoorNotCalled()
+        {
+            // Clear subs
+            _fakeDoor.ClearReceivedCalls();
+            // Arrange
+            _uut._state = StationControl.LadeskabState.Available;
+            _uut.RfidDetected(1);
+            _uut._state = StationControl.LadeskabState.Locked;
+            // Act
+            _uut.RfidDetected(2);
+            // Assert
+            _fakeDoor.Received(0).UnlockDoor();
         }
 
         //[Test]

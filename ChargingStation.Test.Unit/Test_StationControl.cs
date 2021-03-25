@@ -105,16 +105,48 @@ namespace ChargingStation.Test.Unit
         }
 
         [Test]
-        public void DoorClosed_Locked_IdMismatch_UnlockDoorNotCalled()
+        public void HandleDoorEvent_DoorOpened_Available_StateIsDoorOpen()
         {
             // Clear subs
             _fakeDoor.ClearReceivedCalls();
             // Arrange
-
+            _uut._state = StationControl.LadeskabState.Available;
+            DoorEventArgs evt = Substitute.For<DoorEventArgs>();
+            evt.DoorOpened = true;
             // Act
-            
+            _uut.HandleDoorEvent(new object(), evt);
             // Assert
-            
+            Assert.That(_uut._state == StationControl.LadeskabState.DoorOpen);
+        }
+
+        [Test]
+        public void HandleDoorEvent_DoorOpened_DoorOpen_stateUnchanged()
+        {
+            // Clear subs
+            _fakeDoor.ClearReceivedCalls();
+            // Arrange
+            _uut._state = StationControl.LadeskabState.DoorOpen;
+            DoorEventArgs evt = Substitute.For<DoorEventArgs>();
+            evt.DoorOpened = true;
+            // Act
+            _uut.HandleDoorEvent(new object(), evt);
+            // Assert
+            Assert.That(_uut._state == StationControl.LadeskabState.DoorOpen);
+        }
+
+        [Test]
+        public void HandleDoorEvent_DoorOpened_Locked_stateUnchanged()
+        {
+            // Clear subs
+            _fakeDoor.ClearReceivedCalls();
+            // Arrange
+            _uut._state = StationControl.LadeskabState.Locked;
+            DoorEventArgs evt = Substitute.For<DoorEventArgs>();
+            evt.DoorOpened = true;
+            // Act
+            _uut.HandleDoorEvent(new object(), evt);
+            // Assert
+            Assert.That(_uut._state == StationControl.LadeskabState.Locked);
         }
     }
 }

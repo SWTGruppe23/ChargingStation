@@ -148,5 +148,51 @@ namespace ChargingStation.Test.Unit
             // Assert
             Assert.That(_uut._state == StationControl.LadeskabState.Locked);
         }
+
+        [Test]
+        public void HandleDoorEvent_DoorClosed_Available_stateUnchanged()
+        {
+            // Clear subs
+            _fakeDoor.ClearReceivedCalls();
+            // Arrange
+            _uut._state = StationControl.LadeskabState.Available;
+            DoorEventArgs evt = Substitute.For<DoorEventArgs>();
+            evt.DoorOpened = false;
+            // Act
+            _uut.HandleDoorEvent(new object(), evt);
+            // Assert
+            Assert.That(_uut._state == StationControl.LadeskabState.Available);
+        }
+
+        [Test]
+        public void HandleDoorEvent_DoorClosed_DoorOpen_StateIsAvailable()
+        {
+            //clear subs
+            _fakeDoor.ClearReceivedCalls();
+            // Arrange
+            _uut._state = StationControl.LadeskabState.DoorOpen;
+            DoorEventArgs evt = Substitute.For<DoorEventArgs>();
+            evt.DoorOpened = false;
+            // Act
+            _uut.HandleDoorEvent(new object(), evt);
+            // Assert
+            Assert.That(_uut._state == StationControl.LadeskabState.Available);
+        }
+
+        [Test]
+        public void HandleDoorEvent_DoorClosed_Locked_stateUnchanged()
+        {
+            // Clear subs
+            _fakeDoor.ClearReceivedCalls();
+            // Arrange
+            _uut._state = StationControl.LadeskabState.Locked;
+            DoorEventArgs evt = Substitute.For<DoorEventArgs>();
+            evt.DoorOpened = false;
+            // Act
+            _uut.HandleDoorEvent(new object(), evt);
+            // Assert
+            Assert.That(_uut._state == StationControl.LadeskabState.Locked);
+        }
+
     }
 }

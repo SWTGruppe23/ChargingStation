@@ -1,6 +1,8 @@
 using System;
+using ChargingStation.ChargeControl;
 using ChargingStation.Door;
 using ChargingStation.IdReader;
+using ChargingStation.Logger;
 using ChargingStation.UsbCharger;
 using NSubstitute;
 using NSubstitute.ReceivedExtensions;
@@ -12,13 +14,14 @@ namespace ChargingStation.Test.Unit
     {
         private StationControl _uut;
         private IIdReader _fakeIdReader = Substitute.For<IIdReader>();
-        private IUsbCharger _usbChargerSimulator = new UsbChargerSimulator();
+        private IChargeControl _fakeChargeControl = Substitute.For<IChargeControl>();
         private IDoor _fakeDoor = Substitute.For<IDoor>();
+        private ILogger _fakeLogger = Substitute.For<ILogger>();
 
         [SetUp]
         public void Setup()
         {
-            _uut = new StationControl(_fakeIdReader, _fakeDoor, _usbChargerSimulator);
+            _uut = new StationControl(_fakeIdReader, _fakeDoor, _fakeChargeControl, _fakeLogger);
         }
 
         

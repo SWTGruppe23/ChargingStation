@@ -14,24 +14,41 @@ namespace ChargingStation.ChargeControl
         public ChargeControl(IUsbCharger charger)
         {
             _usbCharger = charger;
+            Connected = charger.Connected;
             charger.ChargerEvent += HandleChargerEvent;
         }
 
         public bool Connected { get; }
         public void StartCharge()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Ladning påbegyndt");
+            _usbCharger.StartCharge();
         }
 
         public void StopCharge()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Ladning afsluttet");
+            _usbCharger.StopCharge();
         }
 
         // Event handlers
         private void HandleChargerEvent(object? sender, ChargerEventArgs e)
         {
-            throw new NotImplementedException();
+            if (e.Current ==0) { }
+            else if (e.Current <= 5)
+            {
+                Console.WriteLine("Telefon opladt");
+            }
+            else if (e.Current <= 500)
+            {
+                Console.WriteLine("Telefon lader");
+            }
+            else if (e.Current > 500)
+            {
+                Console.WriteLine("Kortslutning! Ladning stoppes");
+                StopCharge();
+            }
+            
         }
     }
 }

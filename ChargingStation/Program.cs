@@ -21,7 +21,11 @@ namespace ChargingStation
             do
             {
                 string input;
-                System.Console.WriteLine("Indtast E, O, C, R: ");
+                System.Console.WriteLine("Valgmuligheder:");
+                System.Console.WriteLine("E: End");
+                System.Console.WriteLine("O: Open door");
+                System.Console.WriteLine("C: Close door");
+                System.Console.WriteLine("R: Id Reader");
                 input = Console.ReadLine();
                 if (string.IsNullOrEmpty(input)) continue;
 
@@ -32,6 +36,7 @@ namespace ChargingStation
                         break;
 
                     case 'O':
+                        usbCharger.Connected = true;
                         door.OpenDoor();
                         break;
 

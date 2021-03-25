@@ -31,11 +31,11 @@ namespace ChargingStation.Door
             OnDoorClose(new DoorEventArgs { DoorOpened = false });
         }
 
-        protected void OnDoorOpen(DoorEventArgs e)      // Var virtual, men kunne ikke se hvorfor
+        protected virtual void OnDoorOpen(DoorEventArgs e)      // Var virtual, men kunne ikke se hvorfor
         {
             DoorEvent?.Invoke(this, e);
         }
-        protected void OnDoorClose(DoorEventArgs e)     // var virtual 
+        protected virtual void OnDoorClose(DoorEventArgs e)     // var virtual 
         {
             DoorEvent?.Invoke(this, e);
         }

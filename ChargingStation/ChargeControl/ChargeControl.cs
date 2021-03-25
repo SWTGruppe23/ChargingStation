@@ -32,7 +32,7 @@ namespace ChargingStation.ChargeControl
         }
 
         // Event handlers
-        private void HandleChargerEvent(object? sender, ChargerEventArgs e)
+        public void HandleChargerEvent(object? sender, ChargerEventArgs e)
         {
             if (e.Current ==0) { }
             else if (e.Current <= 5)

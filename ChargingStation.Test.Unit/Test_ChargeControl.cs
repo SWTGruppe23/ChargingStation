@@ -20,10 +20,19 @@ namespace ChargingStation.Test.Unit
             _uut = new ChargeControl.ChargeControl(_fakeUsbCharger);
         }
 
+        // Test af connected - duer ikke
+
         //[Test]
-        //public void cstor_IsConnected()
+        //public void IsConnected()
         //{
-        //    Assert.That(_uut, Is.EqualTo());
+        //    //Clear subs
+        //    _fakeUsbCharger.ClearReceivedCalls();
+        //    //Arrange
+        //    _fakeUsbCharger.Connected.Returns(true);
+        //    //Act
+
+        //    //Assert
+        //    Assert.That(_uut.Connected, Is.True);
         //}
 
         [Test]
@@ -52,6 +61,20 @@ namespace ChargingStation.Test.Unit
             _fakeUsbCharger.Received(1).StopCharge();
         }
 
+        // Test af handleren - ikke færdig
+
+        //[Test]
+        //public void HandleEventOver500()
+        //{
+        //    //Clear subs
+        //    _fakeUsbCharger.ClearReceivedCalls();
+        //    //Arrange
+        //    _fakeUsbCharger.Connected.Returns(true);
+        //    //Act
+            
+        //    //Assert
+        //    _fakeUsbCharger.Received(1).StopCharge();
+        //}
 
     }
 }

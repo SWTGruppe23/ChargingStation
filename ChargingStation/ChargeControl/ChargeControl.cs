@@ -7,11 +7,11 @@ using ChargingStation.UsbCharger;
 
 namespace ChargingStation.ChargeControl
 {
-    class ChargeControl : IChargeControl
+    public class ChargeControl : IChargeControl
     {
         private IUsbCharger _usbCharger;
 
-        ChargeControl(IUsbCharger charger)
+        public ChargeControl(IUsbCharger charger)
         {
             _usbCharger = charger;
             charger.ChargerEvent += HandleChargerEvent;

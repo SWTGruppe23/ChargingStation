@@ -13,7 +13,8 @@ namespace ChargingStation
             // Assemble your system here from all the classes
             IIdReader rfidReader = new RfidReader();
             IDoor door = new Door.Door();
-            IChargeControl charger = new ChargeControl.ChargeControl();
+            IUsbCharger usbCharger = new UsbChargerSimulator();
+            IChargeControl charger = new ChargeControl.ChargeControl(usbCharger);
             StationControl control = new StationControl(rfidReader, door, charger);
 
             bool finish = false;

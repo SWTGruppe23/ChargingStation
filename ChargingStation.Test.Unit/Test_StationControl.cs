@@ -25,11 +25,11 @@ namespace ChargingStation.Test.Unit
         }
 
         
-        [Test]
-        public void IIdReader_ReadId_IdReadEvent()
-        {
-            _fakeIdReader.IdReadEvent += Raise.EventWith(new object(), new IdReadEventArgs());
-            _fakeDoor.Received(1).LockDoor();
-        }
+        //[Test]
+        //public void IIdReader_ReadId_IdReadEvent()
+        //{
+        //    _fakeIdReader.IdReadEvent += Raise.EventWith(new object(), new IdReadEventArgs());
+        //    _fakeDoor.Received(1).LockDoor();
+        //}
     }
 }

@@ -2,6 +2,7 @@
 using ChargingStation.ChargeControl;
 using ChargingStation.Door;
 using ChargingStation.IdReader;
+using ChargingStation.Logger;
 using ChargingStation.UsbCharger;
 
 namespace ChargingStation
@@ -15,7 +16,7 @@ namespace ChargingStation
             IDoor door = new Door.Door();
             IUsbCharger usbCharger = new UsbChargerSimulator();
             IChargeControl charger = new ChargeControl.ChargeControl(usbCharger);
-            StationControl control = new StationControl(rfidReader, door, charger);
+            StationControl control = new StationControl(rfidReader, door, charger, new FileLogger());
 
             bool finish = false;
             do

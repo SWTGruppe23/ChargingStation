@@ -8,6 +8,7 @@ using ChargingStation.ChargeControl;
 using ChargingStation.Door;
 using ChargingStation.UsbCharger;
 using ChargingStation.IdReader;
+using ChargingStation.Logger;
 
 namespace ChargingStation
 {
@@ -27,17 +28,18 @@ namespace ChargingStation
         private int _oldId;
         private int CurrentId;
         private IDoor _door;
+        private ILogger _logger;
 
-        private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
         // Her mangler constructor
-        public StationControl(IIdReader idReader, IDoor door, IChargeControl charger)
+        public StationControl(IIdReader idReader, IDoor door, IChargeControl charger, ILogger log)
         {
             idReader.IdReadEvent += HandleReadEvent;
             door.DoorEvent += HandleDoorEvent;
             _charger = charger;
             _door = door;
             _state = LadeskabState.Available;
+            _logger = log;
         }
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
@@ -52,10 +54,7 @@ namespace ChargingStation
                         _door.LockDoor();
                         _charger.StartCharge();
                         _oldId = id;
-                        using (var writer = File.AppendText(logFile))
-                        {
-                            writer.WriteLine(DateTime.Now + ": Skab låst med RFID: {0}", id);
-                        }
+                        _logger.log(": Skab låst op med RFID: {0}", id);
 
                         Console.WriteLine("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
                         _state = LadeskabState.Locked;
@@ -77,10 +76,7 @@ namespace ChargingStation
                     {
                         _charger.StopCharge();
                         _door.UnlockDoor();
-                        using (var writer = File.AppendText(logFile))
-                        {
-                            writer.WriteLine(DateTime.Now + ": Skab låst op med RFID: {0}", id);
-                        }
+                        _logger.log(": Skab låst op med RFID: {0}", id);
 
                         Console.WriteLine("Tag din telefon ud af skabet og luk døren");
                         _state = LadeskabState.Available;

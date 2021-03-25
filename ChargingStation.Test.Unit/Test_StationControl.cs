@@ -34,6 +34,8 @@ namespace ChargingStation.Test.Unit
         [Test]
         public void RdidDetected_IsAvailable_IsConnected_LockDoorIsCalled()
         {
+            // Clear subs
+            _fakeDoor.ClearReceivedCalls();
             // Arrange
             _fakeChargeControl.Connected.Returns(true);
             _uut._state = StationControl.LadeskabState.Available;
@@ -46,6 +48,8 @@ namespace ChargingStation.Test.Unit
         [Test]
         public void RdidDetected_IsAvailable_NotConnected_LockDoorNotCalled()
         {
+            // Clear subs
+            _fakeDoor.ClearReceivedCalls();
             // Arrange
             _fakeChargeControl.Connected.Returns(false);
             _uut._state = StationControl.LadeskabState.Available;
@@ -58,6 +62,8 @@ namespace ChargingStation.Test.Unit
         [Test]
         public void RdidDetected_Locked_UnlockDoorIsCalled()
         {
+            // Clear subs
+            _fakeDoor.ClearReceivedCalls();
             // Arrange
             _fakeChargeControl.Connected.Returns(true);
             _uut._state = StationControl.LadeskabState.Available;

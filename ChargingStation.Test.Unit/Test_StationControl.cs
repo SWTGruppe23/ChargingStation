@@ -1,4 +1,5 @@
 using System;
+using Castle.Core;
 using ChargingStation.ChargeControl;
 using ChargingStation.Door;
 using ChargingStation.IdReader;
@@ -24,7 +25,12 @@ namespace ChargingStation.Test.Unit
             _uut = new StationControl(_fakeIdReader, _fakeDoor, _fakeChargeControl, _fakeLogger);
         }
 
-        
+        [Test]
+        public void ctor_IsAvailable()
+        {
+            Assert.That(_uut._state, Is.EqualTo(StationControl.LadeskabState.Available) );
+        }
+
         //[Test]
         //public void IIdReader_ReadId_IdReadEvent()
         //{

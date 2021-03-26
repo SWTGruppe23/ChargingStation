@@ -42,5 +42,24 @@ namespace ChargingStation.Test.Unit
             //Assert
             evtClose.Received(1);
         }
+
+        [Test]
+        public void IsDoorLocked()
+        {
+            //Act
+            _uut.LockDoor();
+            //Assert
+            Assert.That(_uut.doorLocked_, Is.True);
+        }
+
+        [Test]
+        public void IsDoorUnlocked()
+        {
+            //Act
+            _uut.UnlockDoor();
+            //Assert
+            Assert.That(_uut.doorLocked_, Is.False);
+        }
+
     }
 }

@@ -17,6 +17,7 @@ namespace ChargingStation.Test.Unit
         [SetUp]
         public void Setup()
         {
+            _fakeUsbCharger.Connected = false;
             _uut = new ChargeControl.ChargeControl(_fakeUsbCharger);
         }
 
@@ -109,7 +110,6 @@ namespace ChargingStation.Test.Unit
             //Clear subs
             _fakeUsbCharger.ClearReceivedCalls();
             //Arrange
-            _fakeUsbCharger.Connected.Returns(false);
             ChargerEventArgs evt = Substitute.For<ChargerEventArgs>();
             evt.Current = 0;
             //Act

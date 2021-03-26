@@ -26,7 +26,7 @@ namespace ChargingStation
         public LadeskabState _state;
         private IChargeControl _charger;
         private int _oldId;
-        private int CurrentId;
+        public int CurrentId;
         private IDoor _door;
         private ILogger _logger;
 

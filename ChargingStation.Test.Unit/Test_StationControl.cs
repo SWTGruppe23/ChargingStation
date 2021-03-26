@@ -107,8 +107,6 @@ namespace ChargingStation.Test.Unit
         [Test]
         public void HandleDoorEvent_DoorOpened_Available_StateIsDoorOpen()
         {
-            // Clear subs
-            _fakeDoor.ClearReceivedCalls();
             // Arrange
             _uut._state = StationControl.LadeskabState.Available;
             DoorEventArgs evt = Substitute.For<DoorEventArgs>();
@@ -122,8 +120,6 @@ namespace ChargingStation.Test.Unit
         [Test]
         public void HandleDoorEvent_DoorOpened_DoorOpen_stateUnchanged()
         {
-            // Clear subs
-            _fakeDoor.ClearReceivedCalls();
             // Arrange
             _uut._state = StationControl.LadeskabState.DoorOpen;
             DoorEventArgs evt = Substitute.For<DoorEventArgs>();
@@ -137,8 +133,6 @@ namespace ChargingStation.Test.Unit
         [Test]
         public void HandleDoorEvent_DoorOpened_Locked_stateUnchanged()
         {
-            // Clear subs
-            _fakeDoor.ClearReceivedCalls();
             // Arrange
             _uut._state = StationControl.LadeskabState.Locked;
             DoorEventArgs evt = Substitute.For<DoorEventArgs>();
@@ -152,8 +146,6 @@ namespace ChargingStation.Test.Unit
         [Test]
         public void HandleDoorEvent_DoorClosed_Available_stateUnchanged()
         {
-            // Clear subs
-            _fakeDoor.ClearReceivedCalls();
             // Arrange
             _uut._state = StationControl.LadeskabState.Available;
             DoorEventArgs evt = Substitute.For<DoorEventArgs>();
@@ -167,8 +159,6 @@ namespace ChargingStation.Test.Unit
         [Test]
         public void HandleDoorEvent_DoorClosed_DoorOpen_StateIsAvailable()
         {
-            //clear subs
-            _fakeDoor.ClearReceivedCalls();
             // Arrange
             _uut._state = StationControl.LadeskabState.DoorOpen;
             DoorEventArgs evt = Substitute.For<DoorEventArgs>();
@@ -182,8 +172,6 @@ namespace ChargingStation.Test.Unit
         [Test]
         public void HandleDoorEvent_DoorClosed_Locked_stateUnchanged()
         {
-            // Clear subs
-            _fakeDoor.ClearReceivedCalls();
             // Arrange
             _uut._state = StationControl.LadeskabState.Locked;
             DoorEventArgs evt = Substitute.For<DoorEventArgs>();
@@ -194,5 +182,17 @@ namespace ChargingStation.Test.Unit
             Assert.That(_uut._state == StationControl.LadeskabState.Locked);
         }
 
+
+        [Test]
+        public void HandleReadEvent_IdIs5_CurrentIdIs5()
+        {
+            // Arrange
+            IdReadEventArgs evt = Substitute.For<IdReadEventArgs>();
+            evt.Id = 5;
+            // Act
+            _uut.HandleReadEvent(new object(), evt);
+            // Assert
+            Assert.That(_uut.CurrentId.Equals(5));
+        }
     }
 }

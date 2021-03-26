@@ -13,12 +13,12 @@ namespace ChargingStation.Door
         public event EventHandler<DoorEventArgs> DoorEvent;
         public void LockDoor()
         {
-            //doorLocked_ = true;
+            //dummy metode
         }
 
         public void UnlockDoor()
         {
-            //doorLocked_ = false;
+            //dummy metode
         }
 
         public void OpenDoor()

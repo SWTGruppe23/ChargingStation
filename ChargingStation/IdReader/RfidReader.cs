@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ChargingStation.IdReader
 {
-    class RfidReader : IIdReader
+    public class RfidReader : IIdReader
     {
         public event EventHandler<IdReadEventArgs> IdReadEvent;
 

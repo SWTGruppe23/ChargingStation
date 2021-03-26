@@ -61,23 +61,20 @@ namespace ChargingStation.Test.Unit
             _fakeUsbCharger.Received(1).StopCharge();
         }
 
-        //Test af handleren - ikke færdig
 
-        //[Test]
-        //public void HandleEvent_StopChargeOver500()
-        //{
-        //    //Clear subs
-        //    _fakeUsbCharger.ClearReceivedCalls();
-        //    //Arrange
-        //    ChargerEventArgs evt = Substitute.For<ChargerEventArgs>();
-        //    evt.Current = 501;
-        //    //Act
-        //    _uut.HandleChargerEvent(new object(), evt);
-
-        //    System.Threading.Thread.Sleep(300);
-        //    //Assert
-        //    Assert.That();
-        //}
+        [Test]
+        public void HandleEvent_StopChargeOver500()
+        {
+            //Clear subs
+            _fakeUsbCharger.ClearReceivedCalls();
+            //Arrange
+            ChargerEventArgs evt = Substitute.For<ChargerEventArgs>();
+            evt.Current = 501;
+            //Act
+            _uut.HandleChargerEvent(new object(), evt);
+            //Assert
+            _fakeUsbCharger.Received(1).StopCharge();
+        }
 
     }
 }

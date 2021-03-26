@@ -194,5 +194,20 @@ namespace ChargingStation.Test.Unit
             // Assert
             Assert.That(_uut.CurrentId.Equals(5));
         }
+
+        [Test]
+        public void RdidDetected_IsAvailable_IsConnected_IsLogged()
+        {
+            // Clear subs
+            _fakeDoor.ClearReceivedCalls();
+            // Arrange
+            _fakeChargeControl.Connected.Returns(true);
+            _uut._state = StationControl.LadeskabState.Available;
+            // Act
+            int id = 1;
+            _uut.RfidDetected(id);
+            // Assert
+            _fakeLogger.Received(1).log(": Skab låst op med RFID: {0}", id);
+        }
     }
 }

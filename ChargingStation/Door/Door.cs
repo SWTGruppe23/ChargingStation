@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChargingStation.Door
 {
-    class Door : IDoor
+    public class Door : IDoor
     {
         //private bool doorLocked_;
 
@@ -28,7 +28,7 @@ namespace ChargingStation.Door
 
         public void CloseDoor()
         {
-            OnDoorClose(new DoorEventArgs { DoorOpened = false });
+            OnDoorClose(new DoorEventArgs{ DoorOpened = false });
         }
 
         private void OnDoorOpen(DoorEventArgs e)   

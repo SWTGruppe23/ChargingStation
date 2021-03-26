@@ -61,9 +61,8 @@ namespace ChargingStation.Test.Unit
             _fakeUsbCharger.Received(1).StopCharge();
         }
 
-
         [Test]
-        public void HandleEvent_StopChargeOver500()
+        public void HandleChargerEvent_CurrentIs501_StopCharge()
         {
             //Clear subs
             _fakeUsbCharger.ClearReceivedCalls();
@@ -74,6 +73,34 @@ namespace ChargingStation.Test.Unit
             _uut.HandleChargerEvent(new object(), evt);
             //Assert
             _fakeUsbCharger.Received(1).StopCharge();
+        }
+
+        [Test]
+        public void HandleChargerEvent_CurrentIs4_StillCharging()
+        {
+            //Clear subs
+            _fakeUsbCharger.ClearReceivedCalls();
+            //Arrange
+            ChargerEventArgs evt = Substitute.For<ChargerEventArgs>();
+            evt.Current = 4;
+            //Act
+            _uut.HandleChargerEvent(new object(), evt);
+            //Assert
+            _fakeUsbCharger.Received(0).StopCharge();
+        }
+
+        [Test]
+        public void HandleChargerEvent_CurrentIs100_StillCharging()
+        {
+            //Clear subs
+            _fakeUsbCharger.ClearReceivedCalls();
+            //Arrange
+            ChargerEventArgs evt = Substitute.For<ChargerEventArgs>();
+            evt.Current = 100;
+            //Act
+            _uut.HandleChargerEvent(new object(), evt);
+            //Assert
+            _fakeUsbCharger.Received(0).StopCharge();
         }
 
     }

@@ -8,17 +8,17 @@ namespace ChargingStation.Door
 {
     public class Door : IDoor
     {
-        //private bool doorLocked_;
+        public bool doorLocked_;
 
         public event EventHandler<DoorEventArgs> DoorEvent;
         public void LockDoor()
         {
-            //dummy metode
+            doorLocked_ = true;
         }
 
         public void UnlockDoor()
         {
-            //dummy metode
+            doorLocked_ = false;
         }
 
         public void OpenDoor()

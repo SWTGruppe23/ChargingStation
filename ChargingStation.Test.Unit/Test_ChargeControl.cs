@@ -117,5 +117,19 @@ namespace ChargingStation.Test.Unit
             //Assert
             Assert.That(_uut.Connected, Is.False);
         }
+
+        [Test]
+        public void HandleChargerEvent_CurrentIsNegative_NotConnected()
+        {
+            //Clear subs
+            _fakeUsbCharger.ClearReceivedCalls();
+            //Arrange
+            ChargerEventArgs evt = Substitute.For<ChargerEventArgs>();
+            evt.Current = -1;
+            //Act
+            _uut.HandleChargerEvent(new object(), evt);
+            //Assert
+            Assert.That(_uut.Connected, Is.False);
+        }
     }
 }

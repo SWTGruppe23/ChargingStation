@@ -21,20 +21,6 @@ namespace ChargingStation.Test.Unit
             _uut = new ChargeControl.ChargeControl(_fakeUsbCharger);
         }
 
-        // Test af connected - duer ikke
-
-        //[Test]
-        //public void IsConnected()
-        //{
-        //    //Clear subs
-        //    _fakeUsbCharger.ClearReceivedCalls();
-        //    //Arrange
-        //    _fakeUsbCharger.Connected.Returns(true);
-        //    //Act
-
-        //    //Assert
-        //    Assert.That(_uut.Connected, Is.True);
-        //}
 
         [Test]
         public void Charge_Started()

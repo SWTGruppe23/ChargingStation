@@ -38,6 +38,7 @@ namespace ChargingStation.ChargeControl
             else if (e.Current <= 5)
             {
                 Console.WriteLine("Telefon opladt");
+                StopCharge();
             }
             else if (e.Current <= 500)
             {

@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChargingStation", "ChargingStation\ChargingStation.csproj", "{3DE103FF-152D-4AB9-97D8-A060D6AB052E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChargingStation.Test.Unit", "ChargingStation.Test.Unit\ChargingStation.Test.Unit.csproj", "{BD5FFCE0-89BE-4908-9EFC-C844FB6A2B68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChargingStation.Test.Unit", "ChargingStation.Test.Unit\ChargingStation.Test.Unit.csproj", "{BD5FFCE0-89BE-4908-9EFC-C844FB6A2B68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChargingStationClient", "CharginStationClient\ChargingStationClient.csproj", "{421D7E4A-0461-430C-B51B-E3FB0A572DFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{BD5FFCE0-89BE-4908-9EFC-C844FB6A2B68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD5FFCE0-89BE-4908-9EFC-C844FB6A2B68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD5FFCE0-89BE-4908-9EFC-C844FB6A2B68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{421D7E4A-0461-430C-B51B-E3FB0A572DFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{421D7E4A-0461-430C-B51B-E3FB0A572DFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{421D7E4A-0461-430C-B51B-E3FB0A572DFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{421D7E4A-0461-430C-B51B-E3FB0A572DFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -182,6 +182,20 @@ namespace ChargingStation.Test.Unit
             Assert.That(_uut._state == StationControl.LadeskabState.Locked);
         }
 
+        [Test]
+        public void HandleReadEvent_IdIsNegative_StateUnchanged()
+        {
+            // Arrange
+            _uut._state = StationControl.LadeskabState.Available;
+            _fakeChargeControl.Connected.Returns(true);
+            IdReadEventArgs evt = Substitute.For<IdReadEventArgs>();
+            evt.Id = -1;
+            // Act
+            _uut.HandleReadEvent(new object(), evt);
+            // Assert
+            Assert.That(_uut._state == StationControl.LadeskabState.Available);
+        }
+
 
         [Test]
         public void HandleReadEvent_IdIs5_CurrentIdIs5()

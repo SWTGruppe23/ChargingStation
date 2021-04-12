@@ -45,6 +45,11 @@ namespace ChargingStation
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
         public void RfidDetected(int id)
         {
+            if (id < 0)
+            {
+                _logger.log("Id was negative", id);
+                return;
+            } 
             switch (_state)
             {
                 case LadeskabState.Available:

@@ -38,8 +38,10 @@ namespace ChargingStationClient
                         break;
 
                     case 'O':
-                        usbCharger.Connected = true;
                         door.OpenDoor();
+                        break;
+                    case 'T':
+                        usbCharger.Connected = true;
                         break;
 
                     case 'C':
